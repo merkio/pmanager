@@ -1,0 +1,17 @@
+[app]
+name = "personal-manager"
+port = "8000"
+host = "0.0.0.0"
+version = "0.1.0"
+debug = false
+
+[vk]
+client_id = ""
+secret_key = ""
+access_token = ""
+group_id = ""
+hour = 7
+minute = 5
+
+[db]
+url = "postgres://postgres@localhost/media"
