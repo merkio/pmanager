@@ -1,5 +1,5 @@
 
-FROM rust:1.59-bullseye AS builder
+FROM --platform=$BUILDPLATFORM rust:1.59-bullseye AS builder
 
 WORKDIR /usr/src/pmanager
 COPY . .
