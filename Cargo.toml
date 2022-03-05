@@ -5,7 +5,7 @@ edition = "2021"
 authors = ["Igor Merkushev <>"]
 
 [workspace]
-members = [".", "config", "service", "repo", "tasks", "util"]
+members = [".", "config", "service", "repo", "tasks", "util", "migration"]
 
 [dependencies]
 # web

@@ -29,7 +29,17 @@ jobs:
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
-    - name: Build and push
+    - name: Build and push migration image
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        file: ./Dockerfile_migrations
+        platforms: linux/amd64,linux/arm64
+        push: true
+        tags: |
+          geekspace/pmanager_migration:latest
+          geekspace/pmanager_migration:${{ steps.vars.outputs.tag }}
+    - name: Build and push main image
       uses: docker/build-push-action@v2
       with:
         context: .
