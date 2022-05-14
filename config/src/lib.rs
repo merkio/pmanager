@@ -14,16 +14,6 @@ pub struct App {
 }
 
 #[derive(Debug, Deserialize, Clone)]
-pub struct VkClient {
-    pub client_id: String,
-    pub secret_key: String,
-    pub access_token: String,
-    pub group_id: String,
-    pub hour: i32,
-    pub minute: i32,
-}
-
-#[derive(Debug, Deserialize, Clone)]
 pub struct DbConnection {
     pub url: String,
 }
@@ -31,7 +21,6 @@ pub struct DbConnection {
 #[derive(Debug, Deserialize, Clone)]
 pub struct ApplicationConfig {
     pub app: App,
-    pub vk: VkClient,
     pub db: DbConnection,
 }
 
@@ -58,14 +47,6 @@ impl Default for ApplicationConfig {
 #[cfg(test)]
 mod test {
     use super::*;
-
-    #[test]
-    fn test_vk_client_config() {
-        env::set_var("P_VK_HOUR", String::from("3"));
-
-        let config = ApplicationConfig::default();
-        assert_eq!(config.vk.hour, 3)
-    }
 
     #[test]
     fn test_db_connection_config() {

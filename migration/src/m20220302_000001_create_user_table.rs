@@ -19,16 +19,18 @@ impl MigrationTrait for Migration {
                     .table(User)
                     .if_not_exists()
                     .col(
-                        ColumnDef::new(user::Column::Uuid)
+                        ColumnDef::new(user::Column::Id)
                             .uuid()
                             .not_null()
                             .primary_key(),
                     )
                     .col(ColumnDef::new(user::Column::Name).string().not_null())
+                    .col(ColumnDef::new(user::Column::Email).string().not_null())
                     .col(ColumnDef::new(user::Column::Password).string().not_null())
-                    .col(ColumnDef::new(user::Column::Role).string())
-                    .col(ColumnDef::new(user::Column::CreatedAt).date_time())
-                    .col(ColumnDef::new(user::Column::UpdatedAt).date_time())
+                    .col(ColumnDef::new(user::Column::Enabled).boolean().not_null().default(false))
+                    .col(ColumnDef::new(user::Column::Role).string().not_null())
+                    .col(ColumnDef::new(user::Column::CreatedAt).timestamp_with_time_zone())
+                    .col(ColumnDef::new(user::Column::UpdatedAt).timestamp_with_time_zone())
                     .to_owned(),
             )
             .await

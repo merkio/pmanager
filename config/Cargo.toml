@@ -6,7 +6,6 @@ publish = false
 
 [dependencies]
 config = "0"
-yaml-rust = "0.4"
 dotenv = "0"
 lazy_static = "1"
 serde = "1"
