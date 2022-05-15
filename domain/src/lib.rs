@@ -1,9 +1,9 @@
 mod resource;
-mod s3;
+mod storage;
 mod user;
 
 pub use resource::*;
-pub use s3::*;
+pub use storage::*;
 pub use user::*;
 
 use anyhow::Result;

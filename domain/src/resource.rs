@@ -13,7 +13,7 @@ pub struct Resource {
     pub created_at: DateTime<Utc>,
     pub updated_at: DateTime<Utc>,
 }
-
+#[allow(dead_code)]
 impl Resource {
     fn with_key(mut self, key: &str) -> Self {
         self.key = key.to_owned();

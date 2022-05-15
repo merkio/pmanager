@@ -57,6 +57,7 @@ impl Default for User {
     }
 }
 
+#[allow(dead_code)]
 impl User {
     fn with_name(mut self, name: &str) -> Self {
         self.name = name.to_owned();

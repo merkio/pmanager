@@ -6,3 +6,40 @@ publish = false
 
 
 [dependencies]
+domain = { path = "../domain" }
+config = { path = "../config" }
+
+tokio = { version = "1", features = ["full"] }
+aws-config = "0"
+aws-sdk-s3 = "0"
+aws-types = {version = "0",  features = ["hardcoded-credentials"]}
+aws-smithy-http = "0"
+aws-smithy-types = "0"
+http = "0"
+
+# async trait
+async-trait = "0"
+
+# error
+anyhow = "1"
+
+#log
+log = "0"
+derive_more = "0"
+pretty_env_logger = "0"
+fast_log = { version="1", features = ["lz4","zip", "gzip"]}
+
+
+#mocks
+mockall = "0"
+
+# context initialization
+once_cell = "1"
+
+[dev-dependencies]
+#testing
+testcontainers = "0"
+test-log = "0"
+env_logger = "0"
+tracing = {version = "0", default-features = false}
+tracing-subscriber = {version = "0", default-features = false, features = ["env-filter", "fmt"]}

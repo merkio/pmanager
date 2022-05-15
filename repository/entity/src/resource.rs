@@ -3,7 +3,7 @@ use domain::Resource;
 use sea_orm::entity::prelude::*;
 use sea_orm::*;
 use serde::{Deserialize, Serialize};
-use serde_json::{json, Value};
+use serde_json::Value;
 use uuid::Uuid;
 
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize, DeriveEntityModel)]
