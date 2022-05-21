@@ -67,7 +67,6 @@ impl From<ActiveModel> for Resource {
 }
 
 impl ActiveModel {
-
     pub fn update_model(self, res: Resource) -> Self {
         Self {
             key: ActiveValue::Set(res.key.clone()),

@@ -21,7 +21,9 @@ fn setup() {
     let _ = env_logger::builder().is_test(true).try_init();
 
     let docker = DOCKER.get_or_init(clients::Cli::default);
-    CONTAINER.set(docker.run(Postgres::default().with_version(14))).unwrap();
+    CONTAINER
+        .set(docker.run(Postgres::default().with_version(14)))
+        .unwrap();
     let db_url = format!(
         "postgres://postgres@localhost:{}/postgres",
         CONTAINER
@@ -32,7 +34,9 @@ fn setup() {
     );
     info!("DATABASE URL: {:?}", db_url);
     rt.block_on(async {
-        Migrator::up(&Database::connect(db_url.clone()).await.unwrap(), None).await.unwrap();
+        Migrator::up(&Database::connect(db_url.clone()).await.unwrap(), None)
+            .await
+            .unwrap();
     });
     DB_URL.set(db_url).unwrap();
     RT.set(rt).unwrap();

@@ -52,7 +52,6 @@ impl DefaultStorage {
 
 #[async_trait]
 impl Storage for DefaultStorage {
-
     async fn create_bucket(&self, bucket: &str, location: &str) -> Result<()> {
         info!("Create bucket: {}", bucket);
         self.client

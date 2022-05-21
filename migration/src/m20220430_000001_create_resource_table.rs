@@ -25,7 +25,12 @@ impl MigrationTrait for Migration {
                             .primary_key(),
                     )
                     .col(ColumnDef::new(resource::Column::UserId).uuid())
-                    .col(ColumnDef::new(resource::Column::Key).string().not_null().unique_key())
+                    .col(
+                        ColumnDef::new(resource::Column::Key)
+                            .string()
+                            .not_null()
+                            .unique_key(),
+                    )
                     .col(ColumnDef::new(resource::Column::Tags).json())
                     .col(ColumnDef::new(resource::Column::Metadata).json())
                     .col(ColumnDef::new(resource::Column::CreatedAt).timestamp_with_time_zone())

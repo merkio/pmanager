@@ -1,9 +1,9 @@
+use chrono::{DateTime, Utc};
+use domain::User;
 use sea_orm::entity::prelude::*;
 use sea_orm::*;
+use serde::{Deserialize, Serialize};
 use uuid::Uuid;
-use chrono::{DateTime, Utc};
-use serde::{Serialize, Deserialize};
-use domain::User;
 
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize, DeriveEntityModel)]
 #[sea_orm(table_name = "users")]
@@ -23,7 +23,6 @@ pub struct Model {
 pub enum Relation {}
 
 impl ActiveModelBehavior for ActiveModel {
-
     fn new() -> Self {
         Self {
             id: ActiveValue::Set(Uuid::new_v4()),
@@ -40,7 +39,6 @@ impl ActiveModelBehavior for ActiveModel {
 }
 
 impl From<User> for ActiveModel {
-
     fn from(user: User) -> Self {
         Self {
             id: ActiveValue::Set(user.id.unwrap_or_else(Uuid::new_v4)),
@@ -56,7 +54,6 @@ impl From<User> for ActiveModel {
 }
 
 impl From<ActiveModel> for User {
-
     fn from(model: ActiveModel) -> Self {
         User {
             id: Some(model.id.unwrap()),
@@ -66,13 +63,12 @@ impl From<ActiveModel> for User {
             enabled: model.enabled.unwrap(),
             role: model.role.unwrap().parse().unwrap(),
             created_at: model.created_at.unwrap(),
-            updated_at: model.updated_at.unwrap()
+            updated_at: model.updated_at.unwrap(),
         }
-    }    
+    }
 }
 
 impl ActiveModel {
-
     pub fn update_model(self, user: User) -> Self {
         Self {
             id: self.id,
