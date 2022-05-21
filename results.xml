@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testsuites>
+  <testsuite id="0" name="cargo test #0" package="testsuite/cargo test #0" tests="3" errors="0" failures="0" hostname="localhost" timestamp="2022-05-21T15:45:33.800168263+00:00" time="0">
+    <testcase name="test_aws_config" classname="test" time="0" />
+    <testcase name="test_db_connection_config" classname="test" time="0" />
+    <testcase name="test_app_config" classname="test" time="0" />
+  </testsuite>
+  <testsuite id="1" name="cargo test #1" package="testsuite/cargo test #1" tests="0" errors="0" failures="0" hostname="localhost" timestamp="2022-05-21T15:45:33.800168263+00:00" time="0" />
+  <testsuite id="2" name="cargo test #2" package="testsuite/cargo test #2" tests="0" errors="0" failures="0" hostname="localhost" timestamp="2022-05-21T15:45:33.800168263+00:00" time="0" />
+  <testsuite id="3" name="cargo test #3" package="testsuite/cargo test #3" tests="0" errors="0" failures="0" hostname="localhost" timestamp="2022-05-21T15:45:33.800168263+00:00" time="0" />
+  <testsuite id="4" name="cargo test #4" package="testsuite/cargo test #4" tests="0" errors="0" failures="0" hostname="localhost" timestamp="2022-05-21T15:45:33.800168263+00:00" time="0" />
+  <testsuite id="5" name="cargo test #5" package="testsuite/cargo test #5" tests="8" errors="0" failures="0" hostname="localhost" timestamp="2022-05-21T15:45:33.800168263+00:00" time="0">
+    <testcase name="insert_user" classname="" time="0" />
+    <testcase name="insert_resource" classname="" time="0" />
+    <testcase name="get_resource_by_id" classname="" time="0" />
+    <testcase name="get_all_resources" classname="" time="0" />
+    <testcase name="test_get_all_users" classname="" time="0" />
+    <testcase name="test_get_user_by_id" classname="" time="0" />
+    <testcase name="update_resource" classname="" time="0" />
+    <testcase name="test_update_user" classname="" time="0" />
+  </testsuite>
+  <testsuite id="6" name="cargo test #6" package="testsuite/cargo test #6" tests="4" errors="0" failures="0" hostname="localhost" timestamp="2022-05-21T15:45:33.800168263+00:00" time="0">
+    <testcase name="create_file_in_bucket" classname="" time="0" />
+    <testcase name="create_bucket" classname="" time="0" />
+    <testcase name="create_object_in_bucket" classname="" time="0" />
+    <testcase name="rm_bucket" classname="" time="0" />
+  </testsuite>
+</testsuites>
