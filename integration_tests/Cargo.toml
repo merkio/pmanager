@@ -43,7 +43,7 @@ sea-orm = { version = "0", features = [ "sqlx-postgres", "runtime-tokio-native-t
 sea-schema = { version = "0", default-features = false, features = [ "migration", "debug-print" ] }
 
 # db
-uuid = { version = "0", features = ["serde", "v4"]}
+uuid = { version = "1", features = ["serde", "v4"]}
 chrono = { version = "0", features = ["serde"] }
 tera = "1"
 
