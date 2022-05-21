@@ -2092,12 +2092,8 @@ name = "migration"
 version = "0.1.0"
 dependencies = [
  "entity",
- "fast_log",
- "log",
- "once_cell",
  "pretty_env_logger",
  "sea-schema",
- "testcontainers",
  "tokio",
 ]
 
