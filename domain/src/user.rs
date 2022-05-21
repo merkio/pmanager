@@ -59,27 +59,27 @@ impl Default for User {
 
 #[allow(dead_code)]
 impl User {
-    fn with_name(mut self, name: &str) -> Self {
+    pub fn with_name(mut self, name: &str) -> Self {
         self.name = name.to_owned();
         self
     }
 
-    fn with_email(mut self, email: &str) -> Self {
+    pub fn with_email(mut self, email: &str) -> Self {
         self.email = email.to_owned();
         self
     }
 
-    fn with_password(mut self, password: &str) -> Self {
+    pub fn with_password(mut self, password: &str) -> Self {
         self.password = password.to_owned();
         self
     }
 
-    fn enable(mut self, enabled: bool) -> Self {
+    pub fn enable(mut self, enabled: bool) -> Self {
         self.enabled = enabled;
         self
     }
 
-    fn with_role(mut self, role: Role) -> Self {
+    pub fn with_role(mut self, role: Role) -> Self {
         self.role = role;
         self
     }

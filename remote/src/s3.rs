@@ -52,7 +52,7 @@ impl DefaultStorage {
 
 #[async_trait]
 impl Storage for DefaultStorage {
-    
+
     async fn create_bucket(&self, bucket: &str, location: &str) -> Result<()> {
         info!("Create bucket: {}", bucket);
         self.client
@@ -91,6 +91,7 @@ impl Storage for DefaultStorage {
             filename, bucket, key
         );
         let body = ByteStream::from_path(Path::new(filename)).await?;
+        info!("Upload file from path: {:?}", body);
         self.client
             .put_object()
             .bucket(bucket)
@@ -145,112 +146,5 @@ impl Storage for DefaultStorage {
             .iter()
             .map(|bucket| bucket.name().unwrap_or_default().to_string())
             .collect::<Vec<String>>())
-    }
-}
-
-#[cfg(test)]
-mod tests {
-
-    use std::collections::HashMap;
-
-    use super::*;
-    use anyhow::anyhow;
-    use once_cell::sync::OnceCell;
-    use test_log::test;
-    use testcontainers::{
-        clients::Cli,
-        core::Port,
-        images::generic::{GenericImage, WaitFor},
-        *,
-    };
-    use tokio::runtime::Runtime;
-
-    static DOCKER: OnceCell<Cli> = OnceCell::new();
-    static CONTAINER: OnceCell<Container<Cli, GenericImage>> = OnceCell::new();
-
-    fn setup() {
-        let _ = env_logger::builder().is_test(true).try_init();
-        let image = GenericImage::new("localstack/localstack")
-            .with_env_var("SERVICES", "s3")
-            .with_env_var("DEBUG", "1")
-            .with_wait_for(WaitFor::message_on_stdout(
-                "Running on https://0.0.0.0:4566",
-            ));
-        let docker = DOCKER.get_or_init(clients::Cli::default);
-
-        CONTAINER
-            .set(
-                docker.run_with_args(
-                    image,
-                    RunArgs::default()
-                        .with_name("localstack")
-                        .with_mapped_port::<Port>((4566u16, 4566u16).into())
-                        .with_mapped_port::<Port>((4571u16, 4571u16).into()),
-                ),
-            )
-            .unwrap();
-        info!("Localstack run and ready");
-    }
-
-    fn teardown() {
-        DOCKER.get().unwrap().stop(CONTAINER.get().unwrap().id());
-        DOCKER.get().unwrap().rm(CONTAINER.get().unwrap().id());
-    }
-
-    #[test]
-    fn tests_with_localstack() {
-        let rt = Runtime::new().unwrap();
-        setup();
-        let config = config();
-        let client = rt.block_on(async { DefaultStorage::from_config(config.clone()).await });
-
-        let mut results: HashMap<String, Result<()>> = HashMap::new();
-        let create_get =
-            rt.block_on(async { create_bucket_and_get_list_of_buckets(&client.clone(), &config.region).await });
-        let delete = rt.block_on(async { rm_bucket(&client.clone(), &config.region).await });
-        results.insert(
-            "Create bucket and Get list of buckets".to_owned(),
-            create_get,
-        );
-        results.insert("Remove bucket".to_owned(), delete);
-
-        teardown();
-        for res in results.iter() {
-            info!("TEST: '{}', RESULT: {:?}", res.0, res.1);
-        }
-        assert!(results.values().into_iter().all(|res| res.is_ok()));
-    }
-
-    async fn create_bucket_and_get_list_of_buckets(client: &DefaultStorage, region: &str) -> Result<()> {
-        let bucket_name = "new-bucket".to_owned();
-        client.create_bucket(&bucket_name, region).await?;
-
-        let buckets = client.list_buckets().await?;
-        if buckets.is_empty() || !buckets.contains(&bucket_name) {
-            return Err(anyhow!("Can't create bucket"));
-        }
-        Ok(())
-    }
-
-    async fn rm_bucket(client: &DefaultStorage, region: &str) -> Result<()> {
-        let bucket_name = "rm-bucket".to_owned();
-        client.create_bucket(&bucket_name, region).await?;
-        client.delete_bucket(&bucket_name).await?;
-
-        let buckets = client.list_buckets().await?;
-        if !buckets.is_empty() && buckets.contains(&bucket_name) {
-            return Err(anyhow!("Can't remove bucket"));
-        }
-        Ok(())
-    }
-
-    fn config() -> AwsConfig {
-        AwsConfig {
-            access_key_id: String::from("access_key"),
-            secret_access_key: String::from("secret_key"),
-            region: String::from("eu-west-1"),
-            endpoint: String::from("http://127.0.0.1:4566"),
-            bucket: String::from("test"),
-        }
     }
 }

@@ -15,22 +15,22 @@ pub struct Resource {
 }
 #[allow(dead_code)]
 impl Resource {
-    fn with_key(mut self, key: &str) -> Self {
+    pub fn with_key(mut self, key: &str) -> Self {
         self.key = key.to_owned();
         self
     }
 
-    fn with_tags(mut self, tags: Map<String, Value>) -> Self {
+    pub fn with_tags(mut self, tags: Map<String, Value>) -> Self {
         self.tags = Some(Value::Object(tags));
         self
     }
 
-    fn with_user_id(mut self, user_id: Uuid) -> Self {
+    pub fn with_user_id(mut self, user_id: Uuid) -> Self {
         self.user_id = Some(user_id);
         self
     }
 
-    fn with_metadata(mut self, metadata: Map<String, Value>) -> Self {
+    pub fn with_metadata(mut self, metadata: Map<String, Value>) -> Self {
         self.metadata = Some(Value::Object(metadata));
         self
     }
