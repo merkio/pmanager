@@ -5,4 +5,3 @@ use sea_schema::migration::*;
 async fn main() {
     cli::run_cli(Migrator).await;
 }
-

@@ -15,7 +15,6 @@ impl MigratorTrait for Migrator {
     }
 }
 
-
 #[cfg(test)]
 mod tests {
 
