@@ -5,4 +5,4 @@ edition = "2021"
 authors = ["Igor Merkushev <geek.space@ya.ru>"]
 
 [workspace]
-members = [".", "config", "repository", "tasks", "util", "migration", "domain", "application", "remote", "integration_tests"]
+members = [".", "app_config", "repository", "tasks", "util", "migration", "domain", "application", "remote", "integration_tests"]

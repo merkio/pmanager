@@ -1,5 +1,0 @@
-[app]
-debug = true
-
-[db]
-url = "postgres://postgres@localhost/pmanager"

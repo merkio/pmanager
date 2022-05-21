@@ -16,7 +16,7 @@ path = "tests/storage.rs"
 [dependencies]
 domain = { path = "../domain" }
 remote = { path = "../remote" }
-config = { path = "../config" }
+app_config = { path = "../app_config" }
 repository = { path = "../repository" }
 migration = { path = "../migration" }
 

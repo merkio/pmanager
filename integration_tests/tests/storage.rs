@@ -1,4 +1,4 @@
-use config::AwsConfig;
+use app_config::AwsConfig;
 use ctor::{ctor, dtor};
 use domain::*;
 use log::info;
