@@ -1,4 +1,5 @@
 use anyhow::Result;
+use app_config::AwsConfig;
 use async_trait::async_trait;
 use aws_config::meta::region::RegionProviderChain;
 use aws_sdk_s3::{
@@ -8,7 +9,6 @@ use aws_sdk_s3::{
 };
 use aws_smithy_http::endpoint::Endpoint;
 use aws_types::{credentials::SharedCredentialsProvider, region::Region};
-use config::AwsConfig;
 use domain::Storage;
 use http::Uri;
 use log::info;

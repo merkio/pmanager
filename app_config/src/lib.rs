@@ -84,6 +84,6 @@ mod test {
         let config = ApplicationConfig::default();
         assert!(config.app.debug);
         assert_eq!(config.aws.bucket, String::from("files"));
-        assert_eq!(config.aws.region, String::from("us-east-1"));
+        assert_eq!(config.aws.region, String::from("eu-central-1"));
     }
 }
