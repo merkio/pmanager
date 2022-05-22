@@ -1,28 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <testsuites>
-  <testsuite id="0" name="cargo test #0" package="testsuite/cargo test #0" tests="3" errors="0" failures="0" hostname="localhost" timestamp="2022-05-21T15:45:33.800168263+00:00" time="0">
+  <testsuite id="0" name="cargo test #0" package="testsuite/cargo test #0" tests="3" errors="0" failures="0" hostname="localhost" timestamp="2022-05-22T18:39:56.701644273+00:00" time="0">
     <testcase name="test_aws_config" classname="test" time="0" />
-    <testcase name="test_db_connection_config" classname="test" time="0" />
     <testcase name="test_app_config" classname="test" time="0" />
+    <testcase name="test_db_connection_config" classname="test" time="0" />
   </testsuite>
-  <testsuite id="1" name="cargo test #1" package="testsuite/cargo test #1" tests="0" errors="0" failures="0" hostname="localhost" timestamp="2022-05-21T15:45:33.800168263+00:00" time="0" />
-  <testsuite id="2" name="cargo test #2" package="testsuite/cargo test #2" tests="0" errors="0" failures="0" hostname="localhost" timestamp="2022-05-21T15:45:33.800168263+00:00" time="0" />
-  <testsuite id="3" name="cargo test #3" package="testsuite/cargo test #3" tests="0" errors="0" failures="0" hostname="localhost" timestamp="2022-05-21T15:45:33.800168263+00:00" time="0" />
-  <testsuite id="4" name="cargo test #4" package="testsuite/cargo test #4" tests="0" errors="0" failures="0" hostname="localhost" timestamp="2022-05-21T15:45:33.800168263+00:00" time="0" />
-  <testsuite id="5" name="cargo test #5" package="testsuite/cargo test #5" tests="8" errors="0" failures="0" hostname="localhost" timestamp="2022-05-21T15:45:33.800168263+00:00" time="0">
-    <testcase name="insert_user" classname="" time="0" />
+  <testsuite id="1" name="cargo test #1" package="testsuite/cargo test #1" tests="0" errors="0" failures="0" hostname="localhost" timestamp="2022-05-22T18:39:56.701644273+00:00" time="0" />
+  <testsuite id="2" name="cargo test #2" package="testsuite/cargo test #2" tests="0" errors="0" failures="0" hostname="localhost" timestamp="2022-05-22T18:39:56.701644273+00:00" time="0" />
+  <testsuite id="3" name="cargo test #3" package="testsuite/cargo test #3" tests="0" errors="0" failures="0" hostname="localhost" timestamp="2022-05-22T18:39:56.701644273+00:00" time="0" />
+  <testsuite id="4" name="cargo test #4" package="testsuite/cargo test #4" tests="0" errors="0" failures="0" hostname="localhost" timestamp="2022-05-22T18:39:56.701644273+00:00" time="0" />
+  <testsuite id="5" name="cargo test #5" package="testsuite/cargo test #5" tests="8" errors="0" failures="0" hostname="localhost" timestamp="2022-05-22T18:39:56.701644273+00:00" time="0">
     <testcase name="insert_resource" classname="" time="0" />
-    <testcase name="get_resource_by_id" classname="" time="0" />
     <testcase name="get_all_resources" classname="" time="0" />
+    <testcase name="insert_user" classname="" time="0" />
+    <testcase name="get_resource_by_id" classname="" time="0" />
     <testcase name="test_get_all_users" classname="" time="0" />
     <testcase name="test_get_user_by_id" classname="" time="0" />
-    <testcase name="update_resource" classname="" time="0" />
     <testcase name="test_update_user" classname="" time="0" />
+    <testcase name="update_resource" classname="" time="0" />
   </testsuite>
-  <testsuite id="6" name="cargo test #6" package="testsuite/cargo test #6" tests="4" errors="0" failures="0" hostname="localhost" timestamp="2022-05-21T15:45:33.800168263+00:00" time="0">
-    <testcase name="create_file_in_bucket" classname="" time="0" />
-    <testcase name="create_bucket" classname="" time="0" />
-    <testcase name="create_object_in_bucket" classname="" time="0" />
-    <testcase name="rm_bucket" classname="" time="0" />
+  <testsuite id="6" name="cargo test #6" package="testsuite/cargo test #6" tests="0" errors="0" failures="0" hostname="localhost" timestamp="2022-05-22T18:39:56.701644273+00:00" time="0" />
+  <testsuite id="7" name="cargo test #7" package="testsuite/cargo test #7" tests="0" errors="0" failures="0" hostname="localhost" timestamp="2022-05-22T18:39:56.701644273+00:00" time="0" />
+  <testsuite id="8" name="cargo test #8" package="testsuite/cargo test #8" tests="0" errors="0" failures="0" hostname="localhost" timestamp="2022-05-22T18:39:56.701644273+00:00" time="0" />
+  <testsuite id="9" name="cargo test #9" package="testsuite/cargo test #9" tests="0" errors="0" failures="0" hostname="localhost" timestamp="2022-05-22T18:39:56.701644273+00:00" time="0" />
+  <testsuite id="10" name="cargo test #10" package="testsuite/cargo test #10" tests="0" errors="0" failures="0" hostname="localhost" timestamp="2022-05-22T18:39:56.701644273+00:00" time="0" />
+  <testsuite id="11" name="cargo test #11" package="testsuite/cargo test #11" tests="0" errors="0" failures="0" hostname="localhost" timestamp="2022-05-22T18:39:56.701644273+00:00" time="0" />
+  <testsuite id="12" name="cargo test #12" package="testsuite/cargo test #12" tests="1" errors="0" failures="0" hostname="localhost" timestamp="2022-05-22T18:39:56.701644273+00:00" time="0">
+    <testcase name="it_works" classname="tests" time="0" />
   </testsuite>
+  <testsuite id="13" name="cargo test #13" package="testsuite/cargo test #13" tests="1" errors="0" failures="0" hostname="localhost" timestamp="2022-05-22T18:39:56.701644273+00:00" time="0">
+    <testcase name="it_works" classname="tests" time="0" />
+  </testsuite>
+  <testsuite id="14" name="cargo test #14" package="testsuite/cargo test #14" tests="0" errors="0" failures="0" hostname="localhost" timestamp="2022-05-22T18:39:56.701644273+00:00" time="0" />
+  <testsuite id="15" name="cargo test #15" package="testsuite/cargo test #15" tests="0" errors="0" failures="0" hostname="localhost" timestamp="2022-05-22T18:39:56.701644273+00:00" time="0" />
+  <testsuite id="16" name="cargo test #16" package="testsuite/cargo test #16" tests="0" errors="0" failures="0" hostname="localhost" timestamp="2022-05-22T18:39:56.701644273+00:00" time="0" />
+  <testsuite id="17" name="cargo test #17" package="testsuite/cargo test #17" tests="0" errors="0" failures="0" hostname="localhost" timestamp="2022-05-22T18:39:56.701644273+00:00" time="0" />
+  <testsuite id="18" name="cargo test #18" package="testsuite/cargo test #18" tests="0" errors="0" failures="0" hostname="localhost" timestamp="2022-05-22T18:39:56.701644273+00:00" time="0" />
+  <testsuite id="19" name="cargo test #19" package="testsuite/cargo test #19" tests="0" errors="0" failures="0" hostname="localhost" timestamp="2022-05-22T18:39:56.701644273+00:00" time="0" />
+  <testsuite id="20" name="cargo test #20" package="testsuite/cargo test #20" tests="0" errors="0" failures="0" hostname="localhost" timestamp="2022-05-22T18:39:56.701644273+00:00" time="0" />
+  <testsuite id="21" name="cargo test #21" package="testsuite/cargo test #21" tests="0" errors="0" failures="0" hostname="localhost" timestamp="2022-05-22T18:39:56.701644273+00:00" time="0" />
+  <testsuite id="22" name="cargo test #22" package="testsuite/cargo test #22" tests="0" errors="0" failures="0" hostname="localhost" timestamp="2022-05-22T18:39:56.701644273+00:00" time="0" />
 </testsuites>
