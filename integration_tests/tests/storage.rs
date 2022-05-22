@@ -1,18 +1,18 @@
-#[cfg(feature="storage-test")]
+#[cfg(feature = "storage-test")]
 mod storage_tests {
-use app_config::AwsConfig;
-use ctor::{ctor, dtor};
-use domain::*;
-use log::info;
-use once_cell::sync::OnceCell;
-use remote::*;
-use test_log::test;
-use testcontainers::{
-    clients::Cli,
-    core::Port,
-    images::generic::{GenericImage, WaitFor},
-    *,
-};
+    use app_config::AwsConfig;
+    use ctor::{ctor, dtor};
+    use domain::*;
+    use log::info;
+    use once_cell::sync::OnceCell;
+    use remote::*;
+    use test_log::test;
+    use testcontainers::{
+        clients::Cli,
+        core::Port,
+        images::generic::{GenericImage, WaitFor},
+        *,
+    };
 
     static DOCKER: OnceCell<Cli> = OnceCell::new();
     static CONTAINER: OnceCell<Container<Cli, GenericImage>> = OnceCell::new();
