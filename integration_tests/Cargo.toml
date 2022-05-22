@@ -9,9 +9,9 @@ publish = false
 name = "repository"
 path = "tests/repository.rs"
 
-[[test]]
-name = "storage"
-path = "tests/storage.rs"
+# [[test]]
+# name = "storage"
+# path = "tests/storage.rs"
 
 
 [dependencies]

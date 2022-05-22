@@ -39,7 +39,7 @@ jobs:
       - name: Generate test result
       # and coverage report
         run: |
-          cargo test --workspace -- --skip storage
+          cargo test --workspace
       # cargo install cargo2junit grcov;
       #  $CARGO_OPTIONS -- -Z unstable-options --format json | cargo2junit > results.xml;
       # zip -0 ccov.zip `find . \( -name "$PROJECT_NAME_UNDERSCORE*.gc*" \) -print`;
