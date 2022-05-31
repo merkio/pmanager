@@ -16,6 +16,7 @@ aws-types = {version = "0",  features = ["hardcoded-credentials"]}
 aws-smithy-http = "0"
 aws-smithy-types = "0"
 http = "0"
+bytes = { version = "1", features = ["serde"] }
 
 # async trait
 async-trait = "0"
@@ -28,7 +29,6 @@ log = "0"
 derive_more = "0"
 pretty_env_logger = "0"
 fast_log = { version="1", features = ["lz4","zip", "gzip"]}
-
 
 #mocks
 mockall = "0"

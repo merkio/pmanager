@@ -2,4 +2,4 @@
 debug = true
 
 [db]
-url = "postgres://postgres@localhost/pmanager"
+url = "postgres://postgres@localhost/assets"

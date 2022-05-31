@@ -1,5 +1,5 @@
 [app]
-name = "personal-manager"
+name = "assets"
 port = "8000"
 host = "0.0.0.0"
 version = "0.1.0"
@@ -14,7 +14,7 @@ hour = 7
 minute = 5
 
 [db]
-url = "postgres://postgres@localhost/media"
+url = "postgres://postgres@localhost/assets"
 
 [aws]
 secret_access_key = ""

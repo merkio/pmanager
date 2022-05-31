@@ -33,10 +33,10 @@ impl FromStr for Role {
     type Err = ();
 
     fn from_str(input: &str) -> std::result::Result<Role, Self::Err> {
-        match input {
-            "USER" => Ok(Role::USER),
-            "ADMIN" => Ok(Role::ADMIN),
-            "GUEST" => Ok(Role::GUEST),
+        match input.to_lowercase().as_str() {
+            "user" => Ok(Role::USER),
+            "admin" => Ok(Role::ADMIN),
+            "guest" => Ok(Role::GUEST),
             _ => Err(()),
         }
     }

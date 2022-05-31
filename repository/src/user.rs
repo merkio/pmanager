@@ -56,6 +56,21 @@ impl Repository for UserRepository {
         }
     }
 
+    async fn get_by_key(&self, key: String) -> Result<User> {
+        info!("getting User by name: {}", key);
+        let result = UserEntity::find()
+            .filter(user::Column::Name.eq(key.clone()))
+            .one(&self.db)
+            .await?;
+        match result {
+            Some(result) => Ok(result.into_active_model().into()),
+            None => Err(anyhow::Error::msg(format!(
+                "Entity with name {} doesn't exist",
+                key
+            ))),
+        }
+    }
+
     async fn get_all(&self) -> Result<Vec<User>> {
         info!("getting all Users");
         let cakes: Vec<entity::user::Model> = UserEntity::find().all(&self.db).await?;

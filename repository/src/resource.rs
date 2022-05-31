@@ -56,6 +56,21 @@ impl Repository for ResourceRepository {
         }
     }
 
+    async fn get_by_key(&self, key: String) -> Result<Resource> {
+        info!("getting resource by key: {}", key);
+        let result = ResourceEntity::find()
+            .filter(resource::Column::Key.eq(key.clone()))
+            .one(&self.db)
+            .await?;
+        match result {
+            Some(result) => Ok(result.into_active_model().into()),
+            None => Err(anyhow::Error::msg(format!(
+                "Entity with key {} doesn't exist",
+                key
+            ))),
+        }
+    }
+
     async fn get_all(&self) -> Result<Vec<Resource>> {
         info!("getting all resources");
         let cakes: Vec<entity::resource::Model> = ResourceEntity::find().all(&self.db).await?;

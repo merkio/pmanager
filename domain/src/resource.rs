@@ -3,6 +3,8 @@ use serde::{Deserialize, Serialize};
 use serde_json::{Map, Value};
 use uuid::Uuid;
 
+use crate::FileObject;
+
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct Resource {
     pub id: Option<Uuid>,
@@ -13,6 +15,7 @@ pub struct Resource {
     pub created_at: DateTime<Utc>,
     pub updated_at: DateTime<Utc>,
 }
+
 #[allow(dead_code)]
 impl Resource {
     pub fn with_key(mut self, key: &str) -> Self {
@@ -33,6 +36,18 @@ impl Resource {
     pub fn with_metadata(mut self, metadata: Map<String, Value>) -> Self {
         self.metadata = Some(Value::Object(metadata));
         self
+    }
+}
+
+pub fn from_file_object(object: &FileObject) -> Resource {
+    Resource {
+        id: None,
+        key: object.key.to_owned(),
+        tags: object.tags.to_owned(),
+        user_id: object.user_id,
+        metadata: object.metadata.to_owned(),
+        created_at: Utc::now(),
+        updated_at: Utc::now(),
     }
 }
 

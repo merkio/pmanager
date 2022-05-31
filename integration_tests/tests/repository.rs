@@ -18,7 +18,6 @@ static CONTAINER: OnceCell<Container<Cli, Postgres>> = OnceCell::new();
 #[ctor]
 fn setup() {
     let rt = Runtime::new().unwrap();
-    let _ = env_logger::builder().is_test(true).try_init();
 
     let docker = DOCKER.get_or_init(clients::Cli::default);
     CONTAINER

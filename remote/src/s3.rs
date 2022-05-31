@@ -1,6 +1,7 @@
 use anyhow::Result;
 use app_config::AwsConfig;
 use async_trait::async_trait;
+use bytes::Bytes;
 use aws_config::meta::region::RegionProviderChain;
 use aws_sdk_s3::{
     model::{BucketLocationConstraint, CreateBucketConfiguration},
@@ -32,7 +33,7 @@ impl DefaultStorage {
         DefaultStorage { client }
     }
 
-    pub async fn from_config(config: AwsConfig) -> Self {
+    pub fn from_config(config: AwsConfig) -> Self {
         let mut s3_config_builder = aws_sdk_s3::config::Builder::new();
         s3_config_builder = s3_config_builder
             .endpoint_resolver(Endpoint::immutable(
@@ -114,6 +115,18 @@ impl Storage for DefaultStorage {
             .await?;
 
         Ok(())
+    }
+
+    async fn download_object(&self, bucket: &str, key: &str) -> Result<Bytes> {
+        info!("Download object from the bucket: {} with key: {}", bucket, key);
+        let object = self.client
+            .get_object()
+            .bucket(bucket)
+            .key(key)
+            .send()
+            .await?;
+
+        Ok(object.body.collect().await.unwrap().into_bytes())
     }
 
     async fn delete_object(&self, bucket: &str, key: &str) -> Result<()> {

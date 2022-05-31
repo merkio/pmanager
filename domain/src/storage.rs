@@ -1,5 +1,6 @@
 use anyhow::Result;
 use async_trait::async_trait;
+use bytes::Bytes;
 
 #[async_trait]
 pub trait Storage {
@@ -13,15 +14,11 @@ pub trait Storage {
 
     async fn upload_file(&self, bucket: &str, filename: &str, key: &str) -> Result<()>;
 
+    async fn download_object(&self, bucket: &str, key: &str) -> Result<Bytes>;
+
     async fn upload_object(&self, bucket: &str, file: &[u8], key: &str) -> Result<()>;
 
     async fn delete_object(&self, bucket: &str, key: &str) -> Result<()>;
 
     async fn delete_objects(&self, bucket: &str, keys: Vec<String>) -> Result<()>;
-}
-
-pub struct Object<'a> {
-    pub filename: Option<String>,
-    pub file: Option<&'a [u8]>,
-    pub key: String,
 }

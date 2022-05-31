@@ -37,10 +37,44 @@ impl MigrationTrait for Migration {
                     .col(ColumnDef::new(resource::Column::UpdatedAt).timestamp_with_time_zone())
                     .to_owned(),
             )
+            .await?;
+        manager
+            .create_index(
+                sea_query::Index::create()
+                    .name("idx__resources__key")
+                    .table(Resource)
+                    .col(resource::Column::Key)
+                    .to_owned(),
+            )
+            .await?;
+        manager
+            .create_index(
+                sea_query::Index::create()
+                    .name("idx__resources__tags")
+                    .table(Resource)
+                    .col(resource::Column::Tags)
+                    .to_owned(),
+            )
             .await
     }
 
     async fn down(&self, manager: &SchemaManager) -> Result<(), DbErr> {
+        manager
+            .drop_index(
+                sea_query::Index::drop()
+                    .name("idx__resources__key")
+                    .table(Resource)
+                    .to_owned(),
+            )
+            .await?;
+        manager
+            .drop_index(
+                sea_query::Index::drop()
+                    .name("idx__resources__tags")
+                    .table(Resource)
+                    .to_owned(),
+            )
+            .await?;
         manager
             .drop_table(sea_query::Table::drop().table(Resource).to_owned())
             .await
