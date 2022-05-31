@@ -1,0 +1,24 @@
+[app]
+name = "assets"
+port = "8000"
+host = "0.0.0.0"
+version = "0.1.0"
+debug = false
+
+[vk]
+client_id = ""
+secret_key = ""
+access_token = ""
+group_id = ""
+hour = 7
+minute = 5
+
+[db]
+url = "postgres://postgres@127.0.0.1/assets"
+
+[aws]
+secret_access_key = ""
+access_key_id = ""
+region = "us-east-1"
+endpoint = "https://0.0.0.0:4566"
+bucket = "files"
