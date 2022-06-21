@@ -15,20 +15,24 @@ members = [
     "domain", 
     "application", 
     "remote", 
-    "integration_tests", 
+    "tests", 
     "api"
 ]
 
 [dependencies]
 api = { path = "api" }
-application = { path = "application" }
 app_config = { path = "app_config" }
 
+
+# web
 axum = { version = "0", features = ["multipart", "headers", "json"] }
 tokio = { version = "1", features = ["full"] }
 tracing = "0"
 tracing-subscriber = { version = "0", features = ["env-filter"] }
 tower-http = { version = "0", features = ["trace"] }
+
+# db
+sea-orm = { version = "0", features = [ "sqlx-postgres", "runtime-tokio-native-tls", "macros", "mock", "with-uuid" ], default-features = false }
 
 # errors
 anyhow = "1"
@@ -41,3 +45,6 @@ log = "0.4"
 fast_log = { version="1", features = ["lz4","zip", "gzip"]}
 derive_more = "0"
 env_logger = "0"
+
+# dependabot
+lock_api = "0"

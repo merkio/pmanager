@@ -11,7 +11,7 @@ tasks = { path = "../tasks" }
 repository = { path = "../repository" }
 remote = { path = "../remote" }
 
-sea-orm = { version = "0", features = [ "sqlx-postgres", "runtime-tokio-native-tls", "macros", "with-uuid" ], default-features = false }
+sea-orm = { version = "0", features = [ "sqlx-postgres", "runtime-tokio-native-tls", "macros", "with-uuid"], default-features = false }
 
 # web
 tokio = { version = "1", features = ["full"] }
@@ -20,11 +20,14 @@ tower = "0.4"
 tower-http = { version = "0", features = ["fs"] }
 tower-cookies = { version = "0" }
 tracing-subscriber = { version = "0.3", features = ["env-filter"] }
-bytes = { version = "1", features = ["serde"] }
 
 # json
 serde = "1"
 serde_json = "1"
+
+# bytes
+bytes = { version = "1", features = ["serde"] }
+bytesize = "1"
 
 # error
 anyhow = "1"
@@ -49,10 +52,10 @@ md5 = "0.7"
 yaml-rust = "0.4"
 
 #http client,use rust-tls
-reqwest = { version = "0.11",default-features = false, features = ["json","rustls-tls", "multipart"] }
+reqwest = { version = "0.11", default-features = false, features = ["json", "stream", "multipart"] }
 
 #image code
-image = "0"
+image = "0.24.1"
 
 #async trait
 async-trait = "0"

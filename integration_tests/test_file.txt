@@ -1,1 +1,0 @@
-File for testing s3 upload from local filesystem

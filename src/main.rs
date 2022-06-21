@@ -1,27 +1,29 @@
 use anyhow::Result;
 use api::files::router;
-use application::{DefaultFileService, CONTEXT};
-use axum::{Router, Server};
+use app_config::ApplicationConfig;
+use axum::{Router, Server, Extension};
 use log::info;
 use std::net::SocketAddr;
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
+use sea_orm::Database;
+use std::sync::Arc;
 
 #[tokio::main]
 async fn main() -> Result<()> {
+    let config = ApplicationConfig::default();
+    let db = Database::connect(config.db.url.clone()).await.expect("Failed to connect to database");
+
     tracing_subscriber::registry()
         .with(tracing_subscriber::EnvFilter::new(
             std::env::var("RUST_LOG").unwrap_or_else(|_| "DEBUG".into()),
         ))
         .with(tracing_subscriber::fmt::layer())
         .init();
-    let file_service = DefaultFileService::new(
-        CONTEXT.resources.clone(),
-        CONTEXT.storage.clone(),
-        CONTEXT.config.aws.bucket.as_str(),
-    );
 
     let app = Router::new()
-        .merge(router(Box::new(file_service)))
+        .merge(router())
+        .layer(Extension(Arc::new(config)))
+        .layer(Extension(Arc::new(db)))
         .layer(tower_http::trace::TraceLayer::new_for_http());
 
     info!("Starting server...");

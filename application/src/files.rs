@@ -1,59 +1,70 @@
-use anyhow::Result;
-use async_trait::async_trait;
-use domain::*;
 use std::sync::Arc;
+
+use anyhow::Result;
+use app_config::ApplicationConfig;
+use async_trait::async_trait;
+use bytes::Bytes;
+use bytesize::ByteSize;
+use domain::*;
+use remote::DefaultStorage;
+use repository::ResourceRepository;
+use sea_orm::DbConn;
 
 #[async_trait]
 pub trait FileService {
-    async fn upload(&self, object: FileObject) -> Result<String>
-    where
-        Self: Sized;
-    async fn download(&self, key: &str) -> Result<FileObject>
-    where
-        Self: Sized;
+    async fn upload(self, object: Box<FileObject>) -> Result<String>;
+    async fn download(self, key: String) -> Result<FileObject>;
 }
 
-pub struct DefaultFileService<'a> {
-    resources: Arc<Box<dyn Repository<Type = Resource> + Send + Sync>>,
-    storage: Arc<Box<dyn Storage + Send + Sync>>,
-    bucket: &'a str,
+pub struct DefaultFileService {
+    resources: Box<dyn Repository<Type = Resource> + Send + Sync>,
+    storage: Box<dyn Storage + Send + Sync>,
+    bucket: String,
+    hostname: String,
 }
 
-impl <'a >DefaultFileService<'a> {
-    pub fn new(
-        resources: Arc<Box<dyn Repository<Type = Resource> + Send + Sync>>,
-        storage: Arc<Box<dyn Storage + Send + Sync>>,
-        bucket: &'a str,
-    ) -> Self {
-        DefaultFileService {
-            resources,
-            storage,
-            bucket,
+impl DefaultFileService {
+    pub fn new(config: &ApplicationConfig, db: Arc<DbConn>) -> Self {
+        Self {
+            resources: Box::new(ResourceRepository::new(db)),
+            storage: Box::new(DefaultStorage::from_config(config.aws.clone())),
+            bucket: config.aws.bucket.clone(),
+            hostname: config.aws.endpoint.clone(),
+        }
+    }
+
+    async fn get_asset(&self, resource: &Resource) -> Option<Bytes> {
+        match resource.size {
+            size if { size <= ByteSize::mb(100).as_u64() } => self
+                .storage
+                .download_object(self.bucket.as_str(), resource.key.as_str())
+                .await
+                .ok(),
+            _ => None,
         }
     }
 }
 
 #[async_trait]
-impl FileService for DefaultFileService<'_> {
-    async fn upload(&self, object: FileObject) -> Result<String> {
-        let data = &object.data;
+impl FileService for DefaultFileService {
+    async fn upload(self, object: Box<FileObject>) -> Result<String> {
+        let empty = Bytes::new();
+        let data = object.data.as_ref().unwrap_or(&empty);
         let resource = from_file_object(&object);
         let key = resource.key.clone();
         self.resources.create(resource).await?;
         self.storage
-            .upload_object(self.bucket, data, key.as_str())
+            .upload_object(self.bucket.as_str(), data, key.as_str())
             .await
             .unwrap();
-        Ok(key)
+        Ok(format!("{}/{}/{}", self.hostname, self.bucket, key))
     }
 
-    async fn download(&self, key: &str) -> Result<FileObject> {
+    async fn download(self, key: String) -> Result<FileObject> {
         let resource = self.resources.get_by_key(key.to_owned()).await?;
-        let data = self
-            .storage
-            .download_object(self.bucket, key)
-            .await?;
+        let data = self.get_asset(&resource).await;
         Ok(FileObject {
+            url: resource.url,
             key: resource.key,
             tags: resource.tags,
             user_id: resource.user_id,

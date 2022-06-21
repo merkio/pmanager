@@ -17,8 +17,8 @@ minute = 5
 url = "postgres://postgres@127.0.0.1/assets"
 
 [aws]
-secret_access_key = ""
-access_key_id = ""
+secret_access_key = "wdhqWImJgQP6N8F2AqGuFSZeuhROPFls"
+access_key_id = "xt0mWKmIDGuhVB7r"
 region = "us-east-1"
-endpoint = "https://0.0.0.0:4566"
-bucket = "files"
+endpoint = "https://0.0.0.0:9000"
+bucket = "assets"

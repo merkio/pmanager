@@ -9,9 +9,11 @@ use crate::FileObject;
 pub struct Resource {
     pub id: Option<Uuid>,
     pub key: String,
+    pub url: Option<String>,
     pub tags: Option<Value>,
     pub user_id: Option<Uuid>,
     pub metadata: Option<Value>,
+    pub size: u64,
     pub created_at: DateTime<Utc>,
     pub updated_at: DateTime<Utc>,
 }
@@ -37,15 +39,22 @@ impl Resource {
         self.metadata = Some(Value::Object(metadata));
         self
     }
+
+    pub fn with_size(mut self, size: u64) -> Self {
+        self.size = size;
+        self
+    }
 }
 
 pub fn from_file_object(object: &FileObject) -> Resource {
     Resource {
         id: None,
+        url: object.url.to_owned(),
         key: object.key.to_owned(),
         tags: object.tags.to_owned(),
         user_id: object.user_id,
         metadata: object.metadata.to_owned(),
+        size: object.data.as_ref().map_or(0, |b| b.len() as u64),
         created_at: Utc::now(),
         updated_at: Utc::now(),
     }
@@ -56,9 +65,11 @@ impl Default for Resource {
         Self {
             id: None,
             key: "".to_owned(),
+            url: None,
             tags: None,
             user_id: None,
             metadata: None,
+            size: 0,
             created_at: Utc::now(),
             updated_at: Utc::now(),
         }
