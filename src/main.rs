@@ -1,5 +1,5 @@
 use anyhow::Result;
-use api::files::router;
+use api::files::files_routers;
 use app_config::ApplicationConfig;
 use axum::{Router, Server, Extension};
 use log::info;
@@ -15,13 +15,13 @@ async fn main() -> Result<()> {
 
     tracing_subscriber::registry()
         .with(tracing_subscriber::EnvFilter::new(
-            std::env::var("RUST_LOG").unwrap_or_else(|_| "DEBUG".into()),
+            std::env::var("RUST_LOG").unwrap_or_else(|_| "INFO".into()),
         ))
         .with(tracing_subscriber::fmt::layer())
         .init();
 
     let app = Router::new()
-        .merge(router())
+        .merge(files_routers())
         .layer(Extension(Arc::new(config)))
         .layer(Extension(Arc::new(db)))
         .layer(tower_http::trace::TraceLayer::new_for_http());

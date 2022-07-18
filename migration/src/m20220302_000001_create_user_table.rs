@@ -1,6 +1,6 @@
 use entity::user;
 use entity::user::Entity as User;
-use sea_schema::migration::prelude::*;
+use sea_orm_migration::prelude::*;
 
 pub struct Migration;
 

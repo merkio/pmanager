@@ -8,7 +8,6 @@ use axum::{
     routing::{get, post},
     Json, Router,
 };
-use axum_macros::debug_handler;
 use bytes::Bytes;
 use domain::FileObject;
 use log::info;
@@ -17,13 +16,12 @@ use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
 use std::sync::Arc;
 
-pub fn router() -> Router {
+pub fn files_routers() -> Router {
     Router::new()
         .route("/download/:key", get(download))
         .route("/upload", post(upload))
 }
 
-#[debug_handler]
 async fn upload(
     Extension(ref config): Extension<Arc<ApplicationConfig>>,
     Extension(ref db): Extension<Arc<DbConn>>,
@@ -55,7 +53,7 @@ async fn upload(
             }
             "file" => {
                 data = field.bytes().await.unwrap();
-            }
+            },
             name => ignored_fields.push(name.to_owned()),
         }
     }
@@ -117,7 +115,8 @@ impl IntoResponse for ApiError {
         };
 
         let body = Json(json!({
-            "error": error_message,
+            "error": "API error",
+            "message": error_message,
         }));
 
         (status, body).into_response()

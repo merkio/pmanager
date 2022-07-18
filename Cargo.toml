@@ -11,7 +11,6 @@ members = [
     "repository", 
     "tasks", 
     "util", 
-    "migration", 
     "domain", 
     "application", 
     "remote", 
@@ -32,7 +31,7 @@ tracing-subscriber = { version = "0", features = ["env-filter"] }
 tower-http = { version = "0", features = ["trace"] }
 
 # db
-sea-orm = { version = "0", features = [ "sqlx-postgres", "runtime-tokio-native-tls", "macros", "mock", "with-uuid" ], default-features = false }
+sea-orm = { version = "0", features = [ "sqlx-postgres", "runtime-tokio-native-tls", "macros", "mock", "with-uuid", "with-chrono", "with-json" ], default-features = false }
 
 # errors
 anyhow = "1"

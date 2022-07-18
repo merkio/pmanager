@@ -4,7 +4,6 @@ use anyhow::Result;
 use app_config::ApplicationConfig;
 use async_trait::async_trait;
 use bytes::Bytes;
-use bytesize::ByteSize;
 use domain::*;
 use remote::DefaultStorage;
 use repository::ResourceRepository;
@@ -32,17 +31,6 @@ impl DefaultFileService {
             hostname: config.aws.endpoint.clone(),
         }
     }
-
-    async fn get_asset(&self, resource: &Resource) -> Option<Bytes> {
-        match resource.size {
-            size if { size <= ByteSize::mb(100).as_u64() } => self
-                .storage
-                .download_object(self.bucket.as_str(), resource.key.as_str())
-                .await
-                .ok(),
-            _ => None,
-        }
-    }
 }
 
 #[async_trait]
@@ -52,24 +40,25 @@ impl FileService for DefaultFileService {
         let data = object.data.as_ref().unwrap_or(&empty);
         let resource = from_file_object(&object);
         let key = resource.key.clone();
-        self.resources.create(resource).await?;
+        let url = format!("{}/{}/{}", self.hostname, self.bucket, key);
         self.storage
             .upload_object(self.bucket.as_str(), data, key.as_str())
-            .await
-            .unwrap();
-        Ok(format!("{}/{}/{}", self.hostname, self.bucket, key))
+            .await?;
+        self.resources
+            .create(resource.with_url(url.clone()))
+            .await?;
+        Ok(url)
     }
 
     async fn download(self, key: String) -> Result<FileObject> {
         let resource = self.resources.get_by_key(key.to_owned()).await?;
-        let data = self.get_asset(&resource).await;
         Ok(FileObject {
             url: resource.url,
             key: resource.key,
             tags: resource.tags,
             user_id: resource.user_id,
             metadata: resource.metadata,
-            data,
+            data: None,
         })
     }
 }

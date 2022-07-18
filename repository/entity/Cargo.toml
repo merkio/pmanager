@@ -10,11 +10,11 @@ path = "src/lib.rs"
 
 [dependencies]
 domain = { path = "../../domain" }
-serde = { version = "1.0.56", features = ["derive"] }
+serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 
 # db
-uuid = { version = "0", features = ["serde", "v4"]}
+uuid = { version = "1", features = ["serde", "v4"]}
 chrono = { version = "0.4", features = ["serde"] }
 
 [dependencies.sea-orm]
@@ -24,6 +24,8 @@ features = [
   "debug-print",
   "runtime-tokio-native-tls",
   "sqlx-postgres",
-  "with-uuid"
+  "with-uuid",
+  "with-chrono",
+  "with-json"
 ]
 default-features = false

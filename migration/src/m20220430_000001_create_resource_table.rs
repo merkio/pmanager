@@ -1,6 +1,6 @@
 use entity::resource;
 use entity::resource::Entity as Resource;
-use sea_schema::migration::prelude::*;
+use sea_orm_migration::prelude::*;
 
 pub struct Migration;
 
@@ -31,6 +31,9 @@ impl MigrationTrait for Migration {
                             .not_null()
                             .unique_key(),
                     )
+                    .col(
+                        ColumnDef::new(resource::Column::Url).string(),
+                    )
                     .col(ColumnDef::new(resource::Column::Tags).json())
                     .col(ColumnDef::new(resource::Column::Metadata).json())
                     .col(ColumnDef::new(resource::Column::CreatedAt).timestamp_with_time_zone())
@@ -46,15 +49,6 @@ impl MigrationTrait for Migration {
                     .col(resource::Column::Key)
                     .to_owned(),
             )
-            .await?;
-        manager
-            .create_index(
-                sea_query::Index::create()
-                    .name("idx__resources__tags")
-                    .table(Resource)
-                    .col(resource::Column::Tags)
-                    .to_owned(),
-            )
             .await
     }
 
@@ -63,14 +57,6 @@ impl MigrationTrait for Migration {
             .drop_index(
                 sea_query::Index::drop()
                     .name("idx__resources__key")
-                    .table(Resource)
-                    .to_owned(),
-            )
-            .await?;
-        manager
-            .drop_index(
-                sea_query::Index::drop()
-                    .name("idx__resources__tags")
                     .table(Resource)
                     .to_owned(),
             )

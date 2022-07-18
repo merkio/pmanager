@@ -5,10 +5,13 @@ edition = "2021"
 
 
 [dependencies]
-sea-schema = { version = "0", default-features = false, features = [ "migration", "debug-print" ] }
+sea-schema = { version = "0", default-features = false, features = ["debug-print" ] }
+sea-orm-migration = "0"
 entity = { path = "../repository/entity" }
 
 tokio = { version = "1", features = ["full"] }
 
 # logger
-pretty_env_logger = "0"
+dotenv = "0"
+tracing = "0"
+tracing-subscriber = { version = "0", features = ["env-filter"] }
