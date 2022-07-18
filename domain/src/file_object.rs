@@ -1,10 +1,10 @@
 use bytes::Bytes;
-use serde_json::Value;
 use serde::Serialize;
+use serde_json::Value;
 use uuid::Uuid;
 
 #[derive(Debug, Serialize)]
-pub struct FileObject{
+pub struct FileObject {
     pub key: String,
     pub url: Option<String>,
     pub tags: Option<Value>,
@@ -12,4 +12,3 @@ pub struct FileObject{
     pub metadata: Option<Value>,
     pub data: Option<Bytes>,
 }
-

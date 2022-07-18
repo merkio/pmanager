@@ -5,7 +5,6 @@ use remote::*;
 use test_log::test;
 use testcontainers::*;
 
-
 #[test(tokio::test)]
 async fn create_bucket() {
     let _ = env_logger::builder().is_test(true).try_init();

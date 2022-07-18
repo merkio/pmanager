@@ -1,17 +1,19 @@
 use anyhow::Result;
 use api::files::files_routers;
 use app_config::ApplicationConfig;
-use axum::{Router, Server, Extension};
+use axum::{Extension, Router, Server};
 use log::info;
-use std::net::SocketAddr;
-use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 use sea_orm::Database;
+use std::net::SocketAddr;
 use std::sync::Arc;
+use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
 #[tokio::main]
 async fn main() -> Result<()> {
     let config = ApplicationConfig::default();
-    let db = Database::connect(config.db.url.clone()).await.expect("Failed to connect to database");
+    let db = Database::connect(config.db.url.clone())
+        .await
+        .expect("Failed to connect to database");
 
     tracing_subscriber::registry()
         .with(tracing_subscriber::EnvFilter::new(

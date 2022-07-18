@@ -1,7 +1,6 @@
 use anyhow::Result;
 use app_config::AwsConfig;
 use async_trait::async_trait;
-use bytes::Bytes;
 use aws_config::meta::region::RegionProviderChain;
 use aws_sdk_s3::{
     model::{BucketLocationConstraint, CreateBucketConfiguration},
@@ -10,6 +9,7 @@ use aws_sdk_s3::{
 };
 use aws_smithy_http::endpoint::Endpoint;
 use aws_types::{credentials::SharedCredentialsProvider, region::Region};
+use bytes::Bytes;
 use domain::Storage;
 use http::Uri;
 use log::info;
@@ -118,8 +118,12 @@ impl Storage for DefaultStorage {
     }
 
     async fn download_object(&self, bucket: &str, key: &str) -> Result<Bytes> {
-        info!("Download object from the bucket: {} with key: {}", bucket, key);
-        let object = self.client
+        info!(
+            "Download object from the bucket: {} with key: {}",
+            bucket, key
+        );
+        let object = self
+            .client
             .get_object()
             .bucket(bucket)
             .key(key)

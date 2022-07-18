@@ -53,7 +53,7 @@ async fn upload(
             }
             "file" => {
                 data = field.bytes().await.unwrap();
-            },
+            }
             name => ignored_fields.push(name.to_owned()),
         }
     }

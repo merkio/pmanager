@@ -31,9 +31,7 @@ impl MigrationTrait for Migration {
                             .not_null()
                             .unique_key(),
                     )
-                    .col(
-                        ColumnDef::new(resource::Column::Url).string(),
-                    )
+                    .col(ColumnDef::new(resource::Column::Url).string())
                     .col(ColumnDef::new(resource::Column::Tags).json())
                     .col(ColumnDef::new(resource::Column::Metadata).json())
                     .col(ColumnDef::new(resource::Column::CreatedAt).timestamp_with_time_zone())

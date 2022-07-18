@@ -5,7 +5,7 @@ use once_cell::sync::OnceCell;
 use repository::ResourceRepository;
 use std::sync::Arc;
 use test_log::test;
-use testcontainers::{images::postgres::Postgres, *, clients::Cli};
+use testcontainers::{clients::Cli, images::postgres::Postgres, *};
 
 static DB_URL: OnceCell<String> = OnceCell::new();
 static DOCKER: OnceCell<Arc<Cli>> = OnceCell::new();
@@ -17,7 +17,10 @@ fn init() {
 // #[ctor::ctor]
 async fn setup() -> Container<'static, Postgres> {
     init();
-    let container = DOCKER.get().unwrap().run(RunnableImage::from(Postgres::default()).with_tag("14-alpine"));
+    let container = DOCKER
+        .get()
+        .unwrap()
+        .run(RunnableImage::from(Postgres::default()).with_tag("14-alpine"));
 
     let db_url = format!(
         "postgres://postgres@localhost:{}/postgres",
@@ -38,7 +41,7 @@ async fn setup() -> Container<'static, Postgres> {
 async fn insert_resource() {
     let container = setup().await;
     info!("Container ID: {}", container.id());
-    
+
     let input = Resource::default().with_key("INSERT");
     let resource_repo = ResourceRepository::new(Arc::new(
         Database::connect(DB_URL.get().unwrap()).await.unwrap(),

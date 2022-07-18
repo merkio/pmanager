@@ -6,8 +6,8 @@ use sea_orm::{ActiveModelTrait, ColumnTrait, DbConn, EntityTrait, IntoActiveMode
 use async_trait::async_trait;
 use domain::{Repository, Resource};
 use log::info;
-use uuid::Uuid;
 use std::sync::Arc;
+use uuid::Uuid;
 
 #[derive(Debug)]
 pub struct ResourceRepository {
@@ -72,7 +72,8 @@ impl Repository for ResourceRepository {
 
     async fn get_all(&self) -> Result<Vec<Resource>> {
         info!("getting all resources");
-        let cakes: Vec<entity::resource::Model> = ResourceEntity::find().all(self.db.as_ref()).await?;
+        let cakes: Vec<entity::resource::Model> =
+            ResourceEntity::find().all(self.db.as_ref()).await?;
         Ok(cakes
             .into_iter()
             .map(|e| e.into_active_model().into())
