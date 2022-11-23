@@ -5,7 +5,7 @@ use uuid::Uuid;
 
 use crate::FileObject;
 
-#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, Eq, Serialize, Deserialize)]
 pub struct Resource {
     pub id: Option<Uuid>,
     pub key: String,
