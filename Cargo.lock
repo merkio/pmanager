@@ -154,7 +154,7 @@ dependencies = [
  "derive_more",
  "env_logger 0.9.0",
  "fast_log",
- "lock_api 0.4.7",
+ "lock_api 0.3.4",
  "log",
  "sea-orm 0.9.1",
  "tokio",
@@ -1075,7 +1075,7 @@ dependencies = [
  "bitflags",
  "clap_derive",
  "clap_lex",
- "indexmap",
+ "indexmap 1.9.1",
  "once_cell",
  "strsim 0.10.0",
  "termcolor",
@@ -1505,6 +1505,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "equivalent"
+version = "1.0.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5443807d6dff69373d433ab9ef5378ad8df50ca6298caf15de6e52e24aaf54d5"
+
+[[package]]
 name = "event-listener"
 version = "2.5.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1830,9 +1836,9 @@ dependencies = [
 
 [[package]]
 name = "h2"
-version = "0.3.13"
+version = "0.3.26"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "37a82c6d637fc9515a4694bbf1cb2457b79d81ce52b3108bdeea58b07dd34a57"
+checksum = "81fe527a889e1532da5c525686d96d4c2e74cdd345badf8dfef9f6b39dd5f5e8"
 dependencies = [
  "bytes",
  "fnv",
@@ -1840,7 +1846,7 @@ dependencies = [
  "futures-sink",
  "futures-util",
  "http",
- "indexmap",
+ "indexmap 2.7.0",
  "slab",
  "tokio",
  "tokio-util",
@@ -1863,12 +1869,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "hashbrown"
+version = "0.15.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "bf151400ff0baff5465007dd2f3e717f3fe502074ca563069ce3a6629d07b289"
+
+[[package]]
 name = "hashlink"
 version = "0.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d452c155cb93fecdfb02a73dd57b5d8e442c2063bd7aac72f1bc5e4263a43086"
 dependencies = [
- "hashbrown",
+ "hashbrown 0.12.3",
 ]
 
 [[package]]
@@ -2123,7 +2135,17 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "10a35a97730320ffe8e2d410b5d3b69279b98d2c14bdb8b70ea89ecf7888d41e"
 dependencies = [
  "autocfg",
- "hashbrown",
+ "hashbrown 0.12.3",
+]
+
+[[package]]
+name = "indexmap"
+version = "2.7.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "62f822373a4fe84d4bb149bf54e584a7f4abec90e072ed49cda0edea5b95471f"
+dependencies = [
+ "equivalent",
+ "hashbrown 0.15.2",
 ]
 
 [[package]]
@@ -2621,7 +2643,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ccd746e37177e1711c20dd619a1620f34f5c8b569c53590a72dedd5344d8924a"
 dependencies = [
  "dlv-list",
- "hashbrown",
+ "hashbrown 0.12.3",
 ]
 
 [[package]]
@@ -3941,7 +3963,7 @@ dependencies = [
  "hex",
  "hkdf",
  "hmac",
- "indexmap",
+ "indexmap 1.9.1",
  "itoa",
  "libc",
  "log",
