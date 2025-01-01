@@ -946,9 +946,9 @@ checksum = "14c189c53d098945499cdfa7ecc63567cf3886b3332b312a5b4585d8d3a6a610"
 
 [[package]]
 name = "bytes"
-version = "1.2.1"
+version = "1.9.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ec8a7b6a70fde80372154c65702f00a0f56f3e1c36abbc6c440484be248856db"
+checksum = "325918d6fe32f23b19878fe4b34794ae41fc19ddbe53b10571a4874d44ffd39b"
 dependencies = [
  "serde",
 ]
@@ -3182,8 +3182,8 @@ dependencies = [
  "async-trait",
  "aws-config",
  "aws-sdk-s3",
- "aws-smithy-http 0.46.0",
- "aws-smithy-types 0.46.0",
+ "aws-smithy-http 0.52.0",
+ "aws-smithy-types 0.52.0",
  "aws-types 0.52.0",
  "bytes",
  "ctor",
@@ -4141,8 +4141,8 @@ dependencies = [
  "async-trait",
  "aws-config",
  "aws-sdk-s3",
- "aws-smithy-http 0.46.0",
- "aws-smithy-types 0.46.0",
+ "aws-smithy-http 0.52.0",
+ "aws-smithy-types 0.52.0",
  "aws-types 0.52.0",
  "chrono",
  "ctor",
